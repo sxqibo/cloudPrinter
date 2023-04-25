@@ -3,6 +3,7 @@
     "description": "云打印机",
     "type": "library",
     "autoload": {
+        "files": [],,
         "psr-4": {
             "sxqibo\\cloudprinter\\": "src/"
         }
@@ -16,5 +17,6 @@
     "minimum-stability": "dev",
     "require": {
         "php": ">=7.0"
-    }
+    },
+    "license": "MIT"
 }
