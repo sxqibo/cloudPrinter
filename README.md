@@ -9,7 +9,7 @@
 
 通过 comopser 安装
 ```
-composer require "sxqibo/cloudprinter @dev"
+composer require sxqibo/cloudprinter
 ```
 
 支持的方法：
