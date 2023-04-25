@@ -1,0 +1,17 @@
+{
+    "name": "sxqibo/cloudprinter",
+    "type": "library",
+    "autoload": {
+        "psr-4": {
+            "sxqibo\\cloudprinter\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "yun",
+            "email": "1427596852@qq.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}
