@@ -10,6 +10,11 @@
 
 飞鹅官方文档地址：http://help.feieyun.com/document.php
 
+通过 comopser 安装
+```
+composer require "sxqibo/cloudprinter @dev"
+```
+
 支持的方法：
 - 批量添加打印机接口：printerAddlist
 - 打印订单接口：printMsg
