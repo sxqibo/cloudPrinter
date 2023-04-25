@@ -1,6 +1,6 @@
 <?php
 
-namespace sxqibo\cloudprinter;
+namespace sxqibo\cloudprinter\tools;
 
 /**
  * http 工具类

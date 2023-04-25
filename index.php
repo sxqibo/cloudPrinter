@@ -1,6 +1,6 @@
 <?php
 
-use sxqibo\cloudprinter\FeieYun;
+use sxqibo\cloudprinter\feieyun\FeieYun;
 
 include './vendor/autoload.php';
 

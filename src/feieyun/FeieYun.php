@@ -1,6 +1,8 @@
 <?php
 
-namespace sxqibo\cloudprinter;
+namespace sxqibo\cloudprinter\feieyun;
+
+use sxqibo\cloudprinter\tools\HttpClient;
 
 /**
  * 飞鹅打印机接口
