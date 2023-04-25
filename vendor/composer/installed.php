@@ -3,7 +3,7 @@
         'name' => 'sxqibo/cloudprinter',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => 'aa86cffe0ab689e0399965d8a2d0facec5f00aa0',
+        'reference' => 'fe36dfdbdc8ed32972f71b33367631f066f7c88f',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -13,7 +13,7 @@
         'sxqibo/cloudprinter' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => 'aa86cffe0ab689e0399965d8a2d0facec5f00aa0',
+            'reference' => 'fe36dfdbdc8ed32972f71b33367631f066f7c88f',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
