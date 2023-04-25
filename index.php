@@ -6,9 +6,9 @@ include './vendor/autoload.php';
 
 $config = [
     // 飞鹅云注册账号
-    'user' => '',
+    'user' => '403236160@qq.com',
     // 飞鹅云开发者 UKEY
-    'ukey' => '',
+    'ukey' => 'YqRM2UyHmxdbbEqq',
     // 打印机回调地址
     'callBackUrl' => '',
     // 飞鹅云接口地址
@@ -20,7 +20,7 @@ $config = [
 ];
 
 // 打印机 SN 号
-$sn = '';
+$sn = '960814221';
 // 打印内容
 $content = '<C>测试打印</C>';
 $content .= '<C>山西岐伯科技</C>';

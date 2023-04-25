@@ -3,7 +3,7 @@
     "description": "云打印机",
     "type": "library",
     "autoload": {
-        "files": [],,
+        "files": [],
         "psr-4": {
             "sxqibo\\cloudprinter\\": "src/"
         }
@@ -14,9 +14,16 @@
             "email": "1427596852@qq.com"
         }
     ],
+    "keywords": [
+        "云打印机",
+        "飞鹅云打印机",
+        "PHP"
+    ],
     "minimum-stability": "dev",
     "require": {
-        "php": ">=7.0"
+        "php": ">=7.0",
+        "ext-json": "*",
+        "ext-openssl": "*"
     },
     "license": "MIT"
 }

@@ -78,7 +78,7 @@ class FeieYun
      * @param string $times 打印联数
      * @return string 接口返回值
      */
-    public function printMsg($sn, $content, $times = '1')
+    public function printMsg(string $sn, string $content, string $times = '1')
     {
         // 请求时间
         $time = time();
@@ -114,7 +114,7 @@ class FeieYun
      * @param string $snlist 打印机编号，多台打印机请用减号“-”连接起来
      * @return string         接口返回值
      */
-    public function printerDelList($snlist)
+    public function printerDelList(string $snlist)
     {
         // 请求时间
         $time = time();
@@ -144,7 +144,7 @@ class FeieYun
      * @param string|null $phonenum 打印机流量卡号码,可以不传参,但是不能为空字符串
      * @return string 接口返回值
      */
-    public function printerEdit($sn, $name, $phonenum = null)
+    public function printerEdit(string $sn, string $name, string $phonenum = null): string
     {
         // 请求时间
         $time = time();
@@ -175,10 +175,10 @@ class FeieYun
     /**
      * 清空待打印订单接口 Open_delPrinterSqs
      *
-     * @param  $sn 打印机编号
-     * @return      接口返回值
+     * @param string $sn 打印机编号
+     * @return string 接口返回值
      */
-    public function delPrinterSqs($sn)
+    public function delPrinterSqs(string $sn): string
     {
         // 请求时间
         $time = time();
@@ -203,11 +203,11 @@ class FeieYun
     /**
      * 查询订单是否打印成功接口 Open_queryOrderState
      *
-     * @param  $orderid 调用打印机接口成功后,服务器返回的JSON中的编号
+     * @param string $orderid 调用打印机接口成功后,服务器返回的JSON中的编号
      *                          例如：123456789_20190919163739_95385649
-     * @return           接口返回值
+     * @return string 接口返回值
      */
-    public function queryOrderState($orderid)
+    public function queryOrderState(string $orderid): string
     {
         // 请求时间
         $time = time();
@@ -232,11 +232,11 @@ class FeieYun
     /**
      * 查询指定打印机某天的订单统计数接口 Open_queryOrderInfoByDate
      *
-     * @param  string $sn 打印机的编号
-     * @param  string $date 查询日期，格式YY-MM-DD，如：2019-09-20
-     * @return        接口返回值
+     * @param string $sn 打印机的编号
+     * @param string $date 查询日期，格式YY-MM-DD，如：2019-09-20
+     * @return string 接口返回值
      */
-    public function queryOrderInfoByDate( $sn,  $date)
+    public function queryOrderInfoByDate(string $sn, string $date): string
     {
         // 请求时间
         $time = time();
@@ -262,10 +262,10 @@ class FeieYun
     /**
      * 获取某台打印机状态接口 Open_queryPrinterStatus
      *
-     * @param  $sn 打印机编号
-     * @return      接口返回值
+     * @param string $sn 打印机编号
+     * @return string 接口返回值
      */
-    public function queryPrinterStatus($sn)
+    public function queryPrinterStatus(string $sn): string
     {
         // 请求时间
         $time = time();
@@ -287,8 +287,14 @@ class FeieYun
         }
     }
 
-
-    public function printCallBackSign($param){
+    /**
+     * 参数签名
+     *
+     * @param array $param
+     * @return bool
+     */
+    public function printCallBackSign(array $param): bool
+    {
         $sign = $param['sign'];
         $signType = "RSA2";
         unset($param['sign']);
@@ -322,10 +328,10 @@ MwIDAQAB
     /**
      * signature 生成签名
      *
-     * @param  $time 当前UNIX时间戳，10位，精确到秒
-     * @return  接口返回值
+     * @param string $time 当前UNIX时间戳，10位，精确到秒
+     * @return string 接口返回值
      */
-    private function signature($time)
+    private function signature(string $time): string
     {
         // 公共参数，请求公钥
         return sha1($this->user . $this->ukey . $time);
