@@ -24,7 +24,7 @@ composer require sxqibo/cloudprinter
 - 参数签名：printCallBackSign
 - 生成签名：signature
 
-这里只给出了打印的方法，可以直接使用 `sample/demo.php`
+这里只给出了打印的方法，
 ```php
 $config = [
     // 飞鹅云注册账号
@@ -48,7 +48,7 @@ $feie->printMsg($sn, $content, $times);
 ```
 
 **说明:**
-- 在安装目录下的 index.php 中提供了一个测试文件，需填写开发者在飞鹅云平台注册的账号、UKEY 以及 打印机的 SN 号即可进行测试
+- 在安装目录下的 可以直接使用 `sample/demo.php` 中提供了一个测试文件，需填写开发者在飞鹅云平台注册的账号、UKEY 以及 打印机的 SN 号即可进行测试
 - 回调地址需要自己编写，本包中没有进行封装
 - 设置回调地址需要在飞鹅云的后台中进行配置
 
