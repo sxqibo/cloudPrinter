@@ -24,7 +24,7 @@ composer require sxqibo/cloudprinter
 - 参数签名：printCallBackSign
 - 生成签名：signature
 
-这里只给出了打印的方法
+这里只给出了打印的方法，可以直接使用 `sample/demo.php`
 ```php
 $config = [
     // 飞鹅云注册账号
@@ -33,12 +33,6 @@ $config = [
     'ukey' => '',
     // 打印机回调地址
     'callBackUrl' => '',
-    // 飞鹅云接口地址
-    'ip' => 'api.feieyun.cn',
-    // 飞鹅云接口端口
-    'port' => '80',
-    // 飞鹅云接口路径
-    'path' => '/Api/Open/'
 ];
 
 // 打印机 SN 号
