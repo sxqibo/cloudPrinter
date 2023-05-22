@@ -36,12 +36,12 @@ class FeieYun
 
     public function __construct($config)
     {
-        $this->user = $config['user'];
-        $this->ukey = $config['ukey'];
+        $this->user        = $config['user'];
+        $this->ukey        = $config['ukey'];
         $this->callBackUrl = isset($config['callBackUrl']) && !empty($config['callBackUrl']) ? $config : '';
-        $this->ip = $config['ip'];
-        $this->port = $config['port'];
-        $this->path = $config['path'];
+        $this->ip          = 'api.feieyun.cn';
+        $this->port        = 80;
+        $this->path        = '/Api/Open/';
     }
 
     /**
@@ -297,12 +297,12 @@ class FeieYun
      */
     public function printCallBackSign(array $param): bool
     {
-        $sign = $param['sign'];
+        $sign     = $param['sign'];
         $signType = "RSA2";
         unset($param['sign']);
         $param = array_filter($param);
         ksort($param);
-        $query = http_build_query($param);
+        $query  = http_build_query($param);
         $pubKey = '-----BEGIN PUBLIC KEY-----
 MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA2LDlvyuClqrnKW01FqYg
 valPy1/e09ZWlvjb5Nu+0T1PsGhKjF4WBb+D7x3Dy/Db5IHMcpG/Eps6ew6n/6rw
@@ -319,9 +319,9 @@ MwIDAQAB
 
         $result = FALSE;
         if ("RSA2" == $signType) {
-            $result = (openssl_verify($query, base64_decode($sign), $res, OPENSSL_ALGO_SHA256)===1);
+            $result = (openssl_verify($query, base64_decode($sign), $res, OPENSSL_ALGO_SHA256) === 1);
         } else {
-            $result = (openssl_verify($query, base64_decode($sign), $res)===1);
+            $result = (openssl_verify($query, base64_decode($sign), $res) === 1);
         }
         openssl_free_key($res);
         return $result;
