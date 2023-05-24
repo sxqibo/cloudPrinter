@@ -24,52 +24,41 @@ class FeieYun
     /**
      * 接口IP或域名
      */
-    private $ip = '';
+    private $ip = 'api.feieyun.cn';
     /**
      * 接口IP端口
      */
-    private $port = 0;
+    private $port = 80;
     /**
      * 接口路径
      */
-    private $path = '';
+    private $path = '/Api/Open/';
 
     public function __construct($config)
     {
-        $this->user        = $config['user'];
-        $this->ukey        = $config['ukey'];
+        $this->user = $config['user'];
+        $this->ukey = $config['ukey'];
         $this->callBackUrl = isset($config['callBackUrl']) && !empty($config['callBackUrl']) ? $config : '';
-        $this->ip          = 'api.feieyun.cn';
-        $this->port        = 80;
-        $this->path        = '/Api/Open/';
     }
 
     /**
      * 批量添加打印机接口 Open_printerAddlist
      *
-     * @param string $printerContent 打印机的sn#key
+     * @param string $printerContent
+     *          批量添加规则：
+     *          打印机编号SN(必填) # 打印机识别码KEY(必填) # 备注名称(选填) # 流量卡号码(选填)
+     *          多台打印机请换行（\n）
+     *          每次最多100行(台)。
      * @return string 接口返回值
      */
     public function printerAddlist(string $printerContent)
     {
-        // 请求时间
-        $time = time();
+        $msgInfo = $this->getBaseMsgInfo();
 
-        $msgInfo = [
-            'user'           => $this->user,
-            'stime'          => $time,
-            'sig'            => $this->signature($time),
-            'apiname'        => 'Open_printerAddlist',
-            'printerContent' => $printerContent
-        ];
+        $msgInfo['apiname'] = 'Open_printerAddlist';
+        $msgInfo['printerContent'] = $printerContent;
 
-        $client = new HttpClient($this->ip, $this->port);
-
-        if (!$client->post($this->path, $msgInfo)) {
-            return 'error';
-        } else {
-            return $client->getContent();
-        }
+        return $this->request($msgInfo);
     }
 
     /**
@@ -82,32 +71,18 @@ class FeieYun
      */
     public function printMsg(string $sn, string $content, string $times = '1')
     {
-        // 请求时间
-        $time = time();
+        $msgInfo = $this->getBaseMsgInfo();
 
-        $msgInfo = [
-            'user'    => $this->user,
-            'stime'   => $time,
-            'sig'     => $this->signature($time),
-            'apiname' => 'Open_printMsg',
-            'sn'      => $sn,
-            'content' => $content,
-            // 打印次数
-            'times'   => $times,
-        ];
+        $msgInfo['apiname'] = 'Open_printMsg';
+        $msgInfo['sn'] = $sn;
+        $msgInfo['content'] = $content;
+        $msgInfo['times'] = $times;
 
         if (isset($this->callBackUrl) && !empty($this->callBackUrl)) {
             $msgInfo['backurl'] = $this->callBackUrl;
         }
 
-        $client = new HttpClient($this->ip, $this->port);
-
-        if (!$client->post($this->path, $msgInfo)) {
-            return 'error';
-        } else {
-            // 服务器返回的JSON字符串，建议要当做日志记录起来
-            return $client->getContent();
-        }
+        return $this->request($msgInfo);
     }
 
     /**
@@ -118,24 +93,12 @@ class FeieYun
      */
     public function printerDelList(string $snlist)
     {
-        // 请求时间
-        $time = time();
+        $msgInfo = $this->getBaseMsgInfo();
 
-        $msgInfo = [
-            'user'    => $this->user,
-            'stime'   => $time,
-            'sig'     => $this->signature($time),
-            'apiname' => 'Open_printerDelList',
-            'snlist'  => $snlist
-        ];
+        $msgInfo['apiname'] = 'Open_printerDelList';
+        $msgInfo['snlist'] = $snlist;
 
-        $client = new HttpClient($this->ip, $this->port);
-
-        if (!$client->post($this->path, $msgInfo)) {
-            return 'error';
-        } else {
-            return $client->getContent();
-        }
+        return $this->request($msgInfo);
     }
 
     /**
@@ -148,30 +111,17 @@ class FeieYun
      */
     public function printerEdit(string $sn, string $name, string $phonenum = null): string
     {
-        // 请求时间
-        $time = time();
+        $msgInfo = $this->getBaseMsgInfo();
 
-        $msgInfo = [
-            'user'    => $this->user,
-            'stime'   => $time,
-            'sig'     => $this->signature($time),
-            'apiname' => 'Open_printerEdit',
-            'sn'      => $sn,
-            'name'    => $name,
-
-        ];
+        $msgInfo['apiname'] = 'Open_printerEdit';
+        $msgInfo['sn'] = $sn;
+        $msgInfo['name'] = $name;
 
         if ($phonenum != null) {
             $msgInfo['phonenum'] = $phonenum;
         }
 
-        $client = new HttpClient($this->ip, $this->port);
-
-        if (!$client->post($this->path, $msgInfo)) {
-            return 'error';
-        } else {
-            return $client->getContent();
-        }
+        return $this->request($msgInfo);
     }
 
     /**
@@ -182,24 +132,12 @@ class FeieYun
      */
     public function delPrinterSqs(string $sn): string
     {
-        // 请求时间
-        $time = time();
+        $msgInfo = $this->getBaseMsgInfo();
 
-        $msgInfo = [
-            'user'    => $this->user,
-            'stime'   => $time,
-            'sig'     => $this->signature($time),
-            'apiname' => 'Open_delPrinterSqs',
-            'sn'      => $sn
-        ];
+        $msgInfo['apiname'] = 'Open_delPrinterSqs';
+        $msgInfo['sn'] = $sn;
 
-        $client = new HttpClient($this->ip, $this->port);
-
-        if (!$client->post($this->path, $msgInfo)) {
-            return 'error';
-        } else {
-            return $client->getContent();
-        }
+        return $this->request($msgInfo);
     }
 
     /**
@@ -211,24 +149,12 @@ class FeieYun
      */
     public function queryOrderState(string $orderid): string
     {
-        // 请求时间
-        $time = time();
+        $msgInfo = $this->getBaseMsgInfo();
 
-        $msgInfo = [
-            'user'    => $this->user,
-            'stime'   => $time,
-            'sig'     => $this->signature($time),
-            'apiname' => 'Open_queryOrderState',
-            'orderid' => $orderid
-        ];
+        $msgInfo['apiname'] = 'Open_queryOrderState';
+        $msgInfo['orderid'] = $orderid;
 
-        $client = new HttpClient($this->ip, $this->port);
-
-        if (!$client->post($this->path, $msgInfo)) {
-            return 'error';
-        } else {
-            return $client->getContent();
-        }
+        return $this->request($msgInfo);
     }
 
     /**
@@ -240,25 +166,13 @@ class FeieYun
      */
     public function queryOrderInfoByDate(string $sn, string $date): string
     {
-        // 请求时间
-        $time = time();
+        $msgInfo = $this->getBaseMsgInfo();
 
-        $msgInfo = [
-            'user'    => $this->user,
-            'stime'   => $time,
-            'sig'     => $this->signature($time),
-            'apiname' => 'Open_queryOrderInfoByDate',
-            'sn'      => $sn,
-            'date'    => $date
-        ];
+        $msgInfo['apiname'] = 'Open_queryOrderInfoByDate';
+        $msgInfo['sn'] = $sn;
+        $msgInfo['date'] = $date;
 
-        $client = new HttpClient($this->ip, $this->port);
-
-        if (!$client->post($this->path, $msgInfo)) {
-            return 'error';
-        } else {
-            return $client->getContent();
-        }
+        return $this->request($msgInfo);
     }
 
     /**
@@ -269,24 +183,12 @@ class FeieYun
      */
     public function queryPrinterStatus(string $sn): string
     {
-        // 请求时间
-        $time = time();
+        $msgInfo = $this->getBaseMsgInfo();
 
-        $msgInfo = [
-            'user'    => $this->user,
-            'stime'   => $time,
-            'sig'     => $this->signature($time),
-            'apiname' => 'Open_queryPrinterStatus',
-            'sn'      => $sn
-        ];
+        $msgInfo['apiname'] = 'Open_queryPrinterStatus';
+        $msgInfo['sn'] = $sn;
 
-        $client = new HttpClient($this->ip, $this->port);
-
-        if (!$client->post($this->path, $msgInfo)) {
-            return 'error';
-        } else {
-            return $client->getContent();
-        }
+        return $this->request($msgInfo);
     }
 
     /**
@@ -297,33 +199,23 @@ class FeieYun
      */
     public function printCallBackSign(array $param): bool
     {
-        $sign     = $param['sign'];
-        $signType = "RSA2";
+        $sign = $param['sign'];
+
         unset($param['sign']);
+
         $param = array_filter($param);
         ksort($param);
-        $query  = http_build_query($param);
-        $pubKey = '-----BEGIN PUBLIC KEY-----
-MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA2LDlvyuClqrnKW01FqYg
-valPy1/e09ZWlvjb5Nu+0T1PsGhKjF4WBb+D7x3Dy/Db5IHMcpG/Eps6ew6n/6rw
-v8Ctu+uZI33YNv9sqAMPjG2EN+WcqCrVrMGUmjITVpIkQEjTdkuismf+VL3x+eJo
-W1y/TaLb9vchReBc6IZowRu2yItC+tFbock5Nupsl5uOCKltm3s0VqtiHUrpgVeV
-8dVJHLhmLENnLgcTqrkZeKogFDT+fTOhzQPZVEqQgdat/6kcmD44lN4UI7EvVNfe
-amwRLgy4e/CpInD9cql+t5eiRLem0+rgPq9RLivM1pRt67crH0WGY1xXtAtzWO0M
-MwIDAQAB
------END PUBLIC KEY-----
-';//这里pubKey不能改动，固定公钥
-        //转换为openssl格式密钥
+        $query = http_build_query($param);
+        // 这里pubKey不能改动，固定公钥
+        $pubKey = file_get_contents(__DIR__ . '/signature.txt');
+        // 转换为openssl格式密钥
         $res = openssl_pkey_get_public($pubKey);
-        //调用openssl内置方法验签，返回bool值
 
-        $result = FALSE;
-        if ("RSA2" == $signType) {
-            $result = (openssl_verify($query, base64_decode($sign), $res, OPENSSL_ALGO_SHA256) === 1);
-        } else {
-            $result = (openssl_verify($query, base64_decode($sign), $res) === 1);
-        }
+        // 调用openssl内置方法验签，返回bool值
+        $result = (openssl_verify($query, base64_decode($sign), $res, OPENSSL_ALGO_SHA256) === 1);
+
         openssl_free_key($res);
+
         return $result;
     }
 
@@ -337,5 +229,39 @@ MwIDAQAB
     {
         // 公共参数，请求公钥
         return sha1($this->user . $this->ukey . $time);
+    }
+
+    /**
+     * 拼接飞鹅云基本参数
+     *
+     * @return array
+     */
+    private function getBaseMsgInfo(): array
+    {
+        // 请求时间
+        $time = time();
+
+        return [
+            'user' => $this->user,
+            'stime' => $time,
+            'sig' => $this->signature($time)
+        ];
+    }
+
+    /**
+     * 请求飞鹅云接口
+     *
+     * @param $msgInfo
+     * @return string
+     */
+    private function request($msgInfo): string
+    {
+        $client = new HttpClient($this->ip, $this->port);
+
+        if (!$client->post($this->path, $msgInfo)) {
+            return 'error';
+        } else {
+            return $client->getContent();
+        }
     }
 }
