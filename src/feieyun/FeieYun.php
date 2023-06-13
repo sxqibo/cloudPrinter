@@ -197,7 +197,7 @@ class FeieYun
      * @param array $param
      * @return bool
      */
-    public function printCallBackSign(array $param): bool
+    public static function printCallBackSign(array $param): bool
     {
         $sign = $param['sign'];
 
