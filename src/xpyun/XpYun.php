@@ -129,6 +129,45 @@ final class XpYun
     }
 
     /**
+     * 清空待打印机订单接口
+     */
+    public function delPrinterSqs(string $sn)
+    {
+        $request = $this->getCommonParam();
+
+        $request['sn'] = $sn;
+
+        return $this->request('/xprinter/delPrinterQueue', $request);
+    }
+
+
+    /**
+     * 查询订单是否打印成功接口
+     */
+    public function queryOrderState(string $orderId)
+    {
+        $request = $this->getCommonParam();
+
+        $request['orderId'] = $orderId;
+
+        return $this->request('/xprinter/queryOrderState', $request);
+    }
+
+    /**
+     * 查询指定打印机某天的订单统计数接口
+     */
+    public function queryOrderInfoByDate(string $sn, string $date)
+    {
+        $request = $this->getCommonParam();
+
+        $request['sn'] = $sn;
+        $request['date'] = $date;
+
+        return $this->request('/xprinter/queryOrderStatis', $request);
+    }
+
+
+    /**
      * 发送请求
      *
      * @param $uri

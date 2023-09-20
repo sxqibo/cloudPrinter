@@ -7,9 +7,9 @@ require __DIR__ . '/../vendor/autoload.php';
 class XpYunPrinter
 {
     private $config = [
-        'user' => '',
-        'ukey' => '',
-        'backurlFlag' => null
+        'user' => 'shanxizhiyuzhile@126.com',
+        'ukey' => 'ea1e32e29b804bfc8931aef9b01c29e6',
+        'backurlFlag' => 1
     ];
 
     public function addPrinter()
@@ -47,6 +47,27 @@ class XpYunPrinter
         $xpYun = new XpYun($this->config);
 
         print $xpYun->queryPrintersStatus(['02YU9YZLFC24F48']);
+    }
+
+    public function delPrinterSqs()
+    {
+        $xpYun = new XpYun($this->config);
+
+        print $xpYun->delPrinterSqs('02YU9YZLFC24F48');
+    }
+
+    public function queryOrderState()
+    {
+        $xpYun = new XpYun($this->config);
+
+        print $xpYun->queryOrderState('OM230920142734679800811');
+    }
+
+    public function queryOrderInfoByDate()
+    {
+        $xpYun = new XpYun($this->config);
+
+        print $xpYun->queryOrderInfoByDate('02YU9YZLFC24F48', date('Y-m-d', time()));
     }
 
     public function printMsg()
@@ -87,4 +108,7 @@ EOF;
 //(new XpYunPrinter())->delPrinter();
 //(new XpYunPrinter())->modifyPrinter();
 //(new XpYunPrinter())->statusPrinter();
-(new XpYunPrinter())->statusPrinters();
+//(new XpYunPrinter())->statusPrinters();
+//(new XpYunPrinter())->delPrinterSqs();
+//(new XpYunPrinter())->queryOrderState();
+(new XpYunPrinter())->queryOrderInfoByDate();
