@@ -23,7 +23,8 @@
     "require": {
         "php": ">=7.0",
         "ext-json": "*",
-        "ext-openssl": "*"
+        "ext-openssl": "*",
+        "guzzlehttp/guzzle": "~6.0"
     },
     "license": "MIT"
 }
