@@ -7,16 +7,16 @@ require __DIR__ . '/../vendor/autoload.php';
 class XpYunPrinter
 {
     private $config = [
-        'user' => 'shanxizhiyuzhile@126.com',
-        'ukey' => 'ea1e32e29b804bfc8931aef9b01c29e6',
-        'backurlFlag' => 1
+        'user' => '',
+        'ukey' => '',
+        'callBackUrl' => 1
     ];
 
     public function addPrinter()
     {
         $xpYun = new XpYun($this->config);
         $items = [
-            ['sn' => '02YU9YZLFC24F48', 'name' => '东悦打印机1号']
+            ['sn' => '', 'name' => '']
         ];
         print $xpYun->printerAddlist($items);
     }
@@ -24,7 +24,7 @@ class XpYunPrinter
     public function delPrinter()
     {
         $xpYun = new XpYun($this->config);
-        $items = ['02YU9YZLFC24F48'];
+        $items = [''];
         print $xpYun->printerDelList($items);
     }
 
@@ -32,42 +32,42 @@ class XpYunPrinter
     {
         $xpYun = new XpYun($this->config);
 
-        print $xpYun->printerEdit('02YU9YZLFC24F48', '东悦打印机100号');
+        print $xpYun->printerEdit('', '');
     }
 
     public function statusPrinter()
     {
         $xpYun = new XpYun($this->config);
 
-        print $xpYun->queryPrinterStatus('02YU9YZLFC24F48');
+        print $xpYun->queryPrinterStatus('');
     }
 
     public function statusPrinters()
     {
         $xpYun = new XpYun($this->config);
 
-        print $xpYun->queryPrintersStatus(['02YU9YZLFC24F48']);
+        print $xpYun->queryPrintersStatus(['']);
     }
 
     public function delPrinterSqs()
     {
         $xpYun = new XpYun($this->config);
 
-        print $xpYun->delPrinterSqs('02YU9YZLFC24F48');
+        print $xpYun->delPrinterSqs('');
     }
 
     public function queryOrderState()
     {
         $xpYun = new XpYun($this->config);
 
-        print $xpYun->queryOrderState('OM230920142734679800811');
+        print $xpYun->queryOrderState('');
     }
 
     public function queryOrderInfoByDate()
     {
         $xpYun = new XpYun($this->config);
 
-        print $xpYun->queryOrderInfoByDate('02YU9YZLFC24F48', date('Y-m-d', time()));
+        print $xpYun->queryOrderInfoByDate('', date('Y-m-d', time()));
     }
 
     public function printMsg()
@@ -98,7 +98,7 @@ B2标签：<B2>字体放大二倍<BR></B2>
 <BR>
 BOLD标签：<BOLD>字体加粗<BR></BOLD>
 EOF;
-        $sn = '02YU9YZLFC24F48';
+        $sn = '';
         print $xpYun->printMsg($sn, $data);
     }
 }

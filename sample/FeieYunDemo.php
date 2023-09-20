@@ -4,7 +4,7 @@ use sxqibo\cloudprinter\feieyun\FeieYun;
 
 require __DIR__ . '/../vendor/autoload.php';
 
-class Printer
+class FeieYunDemo
 {
     /**
      * @var string[] 飞鹅云配置
