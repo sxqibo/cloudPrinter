@@ -76,9 +76,9 @@ composer require sxqibo/cloudprinter
 这里只给出了打印的方法,
 ```php
 $config = [
-    // 飞鹅云注册账号
+    // 芯烨云注册账号
     'user' => '',
-    // 飞鹅云开发者 UKEY
+    // 芯烨云开发者 UKEY
     'ukey' => '',
     // 打印机回调地址
     'callBackUrl' => '',
